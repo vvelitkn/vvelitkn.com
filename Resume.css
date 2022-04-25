@@ -3,8 +3,7 @@
 }
 
 .u-section-1 .u-sheet-1 {
-  max-height: 100vh;
-  min-height:100vh;
+  min-height: 100vh;
 }
 
 .u-section-1 .u-image-1 {
@@ -16,7 +15,6 @@
 .u-section-1 .u-custom-html-1 {
   height: auto;
   min-height: 146px;
-  max-height:100vh;
   margin: -245px 431px 0 108px;
 }
 
