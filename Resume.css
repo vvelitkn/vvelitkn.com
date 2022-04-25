@@ -82,7 +82,11 @@
   .u-section-1 .u-sheet-1 {
     min-height: 100vh;
   }
-
+	.u-header .u-menu-1 {
+	  width: auto;
+	  margin-top: 22px;
+	  margin-left: 0px;
+	}
   .u-section-1 .u-image-1 {
     width: 308px;
     height: 308px;
@@ -97,6 +101,8 @@
     margin-right: 263px;
     margin-left: 76px;
   }
+
+
 
   .u-section-1 .u-group-1 {
     min-height: 168px;
