@@ -29,13 +29,13 @@ This medium level CTF covers these topics:
 
 When we execute given file which will be working on given ip’s port 9001 waits an input.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled.png)
+![Untitled](assets/Untitled.png)
 
 We check gdb,  we see “$rbp-4” already set 0x539 and there checks its value. If we couldn’t change the value of “$rbp-4” program doesn’t jump to system call. We want this program jumps system call and give us “/bin/bash”. So we have to overwrite “$rbp-4” and change it to another value. “A” is good.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%201.png)
+![Untitled](assets/Untitled%201.png)
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%202.png)
+![Untitled](assets/Untitled%202.png)
 
 Then we do the same on server.
 
@@ -43,17 +43,17 @@ Then we do the same on server.
 python -c ‘print ("A"*100)’
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%203.png)
+![Untitled](assets/Untitled%203.png)
 
 # Challenge 2 - pwn102
 
 When we execute given file which will be working on given ip’s port 9002 waits an input.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%204.png)
+![Untitled](assets/Untitled%204.png)
 
 We check gdb and see these two cmp processes, they compare datas already set on the beggining of dump.  If we couldn’t change the value of “$rbp-4” and “$rbp-8” program doesn’t jump to system call. We want this program jumps system call and give us “/bin/bash”. So we should overwrite rbp and change “$rbp-4” to “0x0ff33” and “$rbp-8” to “0xc0d3”.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%205.png)
+![Untitled](assets/Untitled%205.png)
 
 First we should see which char overflows buffer and overwrites onto rbp. We can create a string with cyclic and give it to program while we controlling processes with gdb. To do this we should create a breakpoint at first cmp.
 
@@ -61,7 +61,7 @@ First we should see which char overflows buffer and overwrites onto rbp. We can 
 cyclic 200
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%206.png)
+![Untitled](assets/Untitled%206.png)
 
 We let run the program and gives cyclic output as input. When program hits our breakpoint we check the value of “$rbp-4”.
 
@@ -73,7 +73,7 @@ x/s $rbp-4
 cyclic -l caab
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%207.png)
+![Untitled](assets/Untitled%207.png)
 
 We can understand this 108 char will fill the buffer and overwrite “$rbp-4”. But $rbp-8?
 
@@ -120,7 +120,7 @@ We execute our python code locally and check if it works.
 python2.7 code.py
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%208.png)
+![Untitled](assets/Untitled%208.png)
 
 It works, now try it on the remote server.
 
@@ -128,13 +128,13 @@ It works, now try it on the remote server.
 python2.7 code.py REMOTE ip port
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%209.png)
+![Untitled](assets/Untitled%209.png)
 
 # Challenge 3 - pwn103
 
 When we execute given file which will be working on given ip’s port 9002 runs a interfice like discord server.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2010.png)
+![Untitled](assets/Untitled%2010.png)
 
 We check what functions included in this program with gdb and see there is a admins_only function with system call which is we looking for.
 
@@ -142,9 +142,9 @@ We check what functions included in this program with gdb and see there is a adm
 info functions
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2011.png)
+![Untitled](assets/Untitled%2011.png)
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2012.png)
+![Untitled](assets/Untitled%2012.png)
 
 When we create a string with cyclic and try to inflate buffer we see 40 char is enough. Then we write our admins_only’s adress and try to exploit. It works on local but without this command line it does not work on remote server: “exploit  += p64(0x401016)”
 
@@ -168,7 +168,7 @@ Because MOVAPS issue you should find ret’s address from
 objdump -d ./pwn103.pwn103
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2013.png)
+![Untitled](assets/Untitled%2013.png)
 
 ```python
 #!/usr/bin/env python
@@ -204,13 +204,13 @@ print(io.recv().decode('utf-8'))
 io.interactive()
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2014.png)
+![Untitled](assets/Untitled%2014.png)
 
 # Challenge 4 - pwn104
 
 When we execute given file which will be working on given ip’s port 9004 waits an input.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2015.png)
+![Untitled](assets/Untitled%2015.png)
 
 What is this? We should check ghidra to understand what happens here. Probably buffer overflow. Also when we look at “checksec pwn104.pwn104” we see NX disabled.
 
@@ -221,9 +221,9 @@ The No eXecute or the NX bit (also known as Data Execution Prevention or DEP) ma
 > source: [https://ctf101.org/binary-exploitation/no-execute/](https://ctf101.org/binary-exploitation/no-execute/)
 > 
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2016.png)
+![Untitled](assets/Untitled%2016.png)
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2017.png)
+![Untitled](assets/Untitled%2017.png)
 
 80 byte allocated for local_58 but at the end of the decompiled code we see that read function takes 200 byte. This gives us exploitation advantage: **buffer overflow**
 
@@ -231,7 +231,7 @@ When we consider that NX is disabled we can execute a shell code with buffer ove
 
 We find how much character infilate the buffer. Then we write the exploit.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2018.png)
+![Untitled](assets/Untitled%2018.png)
 
 ```python
 #!/usr/bin/env python
@@ -267,35 +267,35 @@ io.sendline(exploit)
 io.interactive()
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2019.png)
+![Untitled](assets/Untitled%2019.png)
 
 # Challenge 5 - pwn105
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2020.png)
+![Untitled](assets/Untitled%2020.png)
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2021.png)
+![Untitled](assets/Untitled%2021.png)
 
 After some tries we got the shell
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2022.png)
+![Untitled](assets/Untitled%2022.png)
 
 You can say you tried something and find the correct numbers. It is true but I know that simple integer overflow can be done here as we know interger has range (-2,147,483,647 to 2,147,483,647) if we give the highest value and add something to it, the sum will go to the opposite side that is negative one. 2,147,483,647 is 01111111111111111111111111111111 and it's the biggest positive number that will fit in 32 bits when using the "two's complement" notation. So when we add 1 number becomes negative.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2023.png)
+![Untitled](assets/Untitled%2023.png)
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2024.png)
+![Untitled](assets/Untitled%2024.png)
 
 # Challenge 6 - pwn106
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2025.png)
+![Untitled](assets/Untitled%2025.png)
 
 We check gdb,r2 and cutter. We are looking for system call or hidden flag in stack. After wasting time with gdb and r2, cutter gives us what we want.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2026.png)
+![Untitled](assets/Untitled%2026.png)
 
 We see that there is redacted flag there and there is a format string vulnerability. Program takes input and directly, without controlling print it back. Here is programmer doesn’t specify format specifier we can provide our own format specifier to leak values from the stack.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2027.png)
+![Untitled](assets/Untitled%2027.png)
 
 Some brute force actions we found right order of hex codes and reverse unhexed values and get the flag.
 
@@ -329,17 +329,17 @@ for word in output:
     print(str(reverse_decoded.decode("utf-8")), end ="")
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2028.png)
+![Untitled](assets/Untitled%2028.png)
 
 # Challenge 7 - pwn107
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2029.png)
+![Untitled](assets/Untitled%2029.png)
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2030.png)
+![Untitled](assets/Untitled%2030.png)
 
 We see that stack canary is found, No eXecute bit enabled and also PIE is enabled. This means we have to careful about buffer overflowing and when we want to find the addresses we can not do it staticly. What I mean is we have to leak stack canary data and dynamic base address of library.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2031.png)
+![Untitled](assets/Untitled%2031.png)
 
 We see that canary stack protection is enabled. We have format string vulnerability, so we can leak datas on stack where return address and stack value already written. So we gonna leak canary value and bypass canary protection. But how we know where is the canary value? We check radare2:
 
@@ -350,13 +350,13 @@ afl
 pdf @ main
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2032.png)
+![Untitled](assets/Untitled%2032.png)
 
 As we can see canary value stored at @ rbp-0x8
 
 We gonna put 2 breakpoints to vulnerable function and next one to see what is actually printing. After that we gonna run program and check the stack.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2033.png)
+![Untitled](assets/Untitled%2033.png)
 
 We know that rbp-0x8 is canary value so we print stack.
 
@@ -364,7 +364,7 @@ We know that rbp-0x8 is canary value so we print stack.
 pxr @ rsp
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2034.png)
+![Untitled](assets/Untitled%2034.png)
 
 We can not copy and use canary value we found because this value changes dynamicly, we gonna leak this value. So we have to detect canary value’s location. Our canary value is located at input+7.
 
@@ -377,17 +377,17 @@ base address + static_get_streak = dynamic_get_streak
 
 We have to use these range of libc addresses because our libc function should return to the binary itself.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2035.png)
+![Untitled](assets/Untitled%2035.png)
 
 We found it. Our static libc location is at input+4.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2036.png)
+![Untitled](assets/Untitled%2036.png)
 
 Now we gonna leak input’s location and write the exploit. We are looking for 41 values in leaked datas.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2037.png)
+![Untitled](assets/Untitled%2037.png)
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2038.png)
+![Untitled](assets/Untitled%2038.png)
 
 ```python
 #!/usr/bin/env python
@@ -436,19 +436,19 @@ io.sendline(payload)
 io.interactive()
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2039.png)
+![Untitled](assets/Untitled%2039.png)
 
 We got it (locally), then try it on remote server (fingers crossed). And got it.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2040.png)
+![Untitled](assets/Untitled%2040.png)
 
 # Challenge 8 - pwn108
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2041.png)
+![Untitled](assets/Untitled%2041.png)
 
 Here we see format string vulnerability.
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2042.png)
+![Untitled](assets/Untitled%2042.png)
 
 Using a format string we overwrite the GOT (Global Offset Table) on a non-PIE binary.
 
@@ -489,4 +489,4 @@ io.sendline(b"%" + str(holiday).encode("utf-8") + b"s%6$lln")
 io.interactive()
 ```
 
-![Untitled](Pwn101%20-%20TryHackMe%20CTF%20Writeup/Untitled%2043.png)
+![Untitled](assets/Untitled%2043.png)
