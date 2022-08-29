@@ -2,7 +2,7 @@
 
 Stack canaries or security cookies are randomly assigned or tell-tale parts added to binary. It aims to protect from changing/manipulating critical stack values like “Return Address Pointer”.
 
-![canaries_png_by_dalidas_art_db041pb-250t.png](assets/canaries_png_by_dalidas_art_db041pb-250t.png)
+![Untitled](assets/canaries_png_by_dalidas_art_db041pb-250t.png)
 
 One way to prevent the stack-based buffer overflow above from being successful, is introducing a stack canary just before the SFP and the RP. This token value will be added by the compiler and serve as a warning that SFP and RET may be written.
 
@@ -10,7 +10,7 @@ One way to prevent the stack-based buffer overflow above from being successful, 
 
 If there is a stack-base buffer overflow happens, buffer iniflates and write the remaining values over the other stack elements in order like this: Buffer → Canary → SFP → RET. Here we will assume that we  are attacking a program which have a stack with stack canary like this:
 
-![Untitled](/Untitled%201.png)
+![Untitled](assets/Untitled%201.png)
 
 There is a vulnerability gives us advantage to overflow the buffer and overwrite the return address. We think we can simply write our code, find the buffer size, write the exploit then done. We try it with our exploit but program gives us an error “**stack smashing detected**”.
 
