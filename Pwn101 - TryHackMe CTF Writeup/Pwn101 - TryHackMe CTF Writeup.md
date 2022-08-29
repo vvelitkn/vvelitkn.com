@@ -29,7 +29,7 @@ This medium level CTF covers these topics:
 
 When we execute given file which will be working on given ip’s port 9001 waits an input.
 
-<p align="center"> <img src="assets/Untitled.png"> </p>
+<p align="center"> <img  src="assets/Untitled.png"> </p>
 
 We check gdb,  we see “$rbp-4” already set 0x539 and there checks its value. If we couldn’t change the value of “$rbp-4” program doesn’t jump to system call. We want this program jumps system call and give us “/bin/bash”. So we have to overwrite “$rbp-4” and change it to another value. “A” is good.
 
