@@ -2,29 +2,29 @@
 
 Stack canaries or security cookies are randomly assigned or tell-tale parts added to binary. It aims to protect from changing/manipulating critical stack values like “Return Address Pointer”.
 
-![Untitled](assets/canaries_png_by_dalidas_art_db041pb-250t.png)
+<p align="center"> <img src="assets/canaries_png_by_dalidas_art_db041pb-250t.png"> </p>
 
 One way to prevent the stack-based buffer overflow above from being successful, is introducing a stack canary just before the SFP and the RP. This token value will be added by the compiler and serve as a warning that SFP and RET may be written.
 
-![Untitled](assets/Untitled.png)
+<p align="center"> <img src="assets/Untitled.png"> </p>
 
 If there is a stack-base buffer overflow happens, buffer iniflates and write the remaining values over the other stack elements in order like this: Buffer → Canary → SFP → RET. Here we will assume that we  are attacking a program which have a stack with stack canary like this:
 
-![Untitled](assets/Untitled%201.png)
+<p align="center"> <img src=" assets/Untitled%201.png "> </p>
 
 There is a vulnerability gives us advantage to overflow the buffer and overwrite the return address. We think we can simply write our code, find the buffer size, write the exploit then done. We try it with our exploit but program gives us an error “**stack smashing detected**”.
 
-![Untitled](assets/Untitled%202.png)
+<p align="center"> <img src="assets/Untitled%202.png"> </p>
 
 Because we overwrite “Canary” with bunch of “A”s. Program checks “Canary” before “Return Pointer” and if “Canary” is changed program knows that buffer overflow happened and have to abort the process to protect program.
 
 Check GDB output given below. We wrote our exploit and execute with our exploit.
 
-![Untitled](assets/Untitled%203.png)
+<p align="center"> <img src="assets/Untitled%203.png"> </p>
 
 First 100 byte of this program is **buffer** part of stack which is filled by “A” (hex: 41), next 4 byte is **Canary** which is filled with “C” (hex:43), next 12 byte is **SFP** which is filled with “D” (hex:44) and next 4 byte is **Return Pointer** which is filled with “B” (hex: 42). We changed our **Canary** value and when program checks canary value before jump, program will be aborted. Because our compiler added **Canary check** before  **Return Pointer** **like this:**
 
-![Untitled](assets/Untitled%204.png)
+<p align="center"> <img src="assets/Untitled%204.png"> </p>
 
 If Canary value changed program calls __stack_chk_fail; if Canary value is same program continues.
 
@@ -60,7 +60,7 @@ There are multiple ways to bypass stack canaries. If we want to bypass stack can
 
 When we give input like this: “%p%p%p%p%p%p%p%p%p%p” we can find exact order of canary value. With this input we say “Hey, can you give me your stack values, please?”, because format string vulnerability gives us this advantage. As you can see in given example, attacker found canary value at 55. location and prints it with ”%55$p”.
 
-![Untitled](assets/Untitled%205.png)
+<p align="center"> <img src="assets/Untitled%205.png"> </p>
 
 Bruteforce: The canary is determined when the program starts up for the first time which means that if the program forks, it keeps the same stack cookie in the child process. This means that if the input that can overwrite the canary is sent to the child, we can use whether it crashes as an oracle and brute-force 1 byte at a time!
 
