@@ -7,6 +7,6 @@ layout: default
 # HOMEPAGE
 ## POSTS
 
-*   ### [Pwn101 - TryHackMe CTF Detailed Writeup](/Pwn101%20-%20TryHackMe%20CTF%20Writeup/Pwn101%20-%20TryHackMe%20CTF%20Writeup)
+*   ### [Pwn101 - TryHackMe CTF Detailed Writeup](/Pwn101-TryHackMe-CTF-Writeup)
 
-*   ### [Buffer Overflow Protection - Stack Canary](/Buffer%20Overflow%20Protection%20-%20Stack%20Canary/Buffer%20Overflow%20Protection%20-%20Stack%20Canary)
+*   ### [Buffer Overflow Protection - Stack Canary](/Buffer-Overflow-Protection-Stack-Canary)
