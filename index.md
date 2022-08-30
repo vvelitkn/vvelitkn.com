@@ -10,9 +10,9 @@ Welcome to my blog, I am going to share write-ups, supportive articles about som
 
 ## CTF Write-up
 
-*   ### [Pwn101 - TryHackMe CTF Detailed Writeup](/Pwn101-TryHackMe-CTF-Writeup)
+*   ### [Pwn101 - TryHackMe CTF Detailed Write-up](/Pwn101-TryHackMe-CTF-Writeup)
 
-*   ### [Dear QA - TryHackMe CTF Writeup](/Dear-QA-TryHackMe-CTF-Writeup)
+*   ### [Dear QA - TryHackMe CTF Write-up](/Dear-QA-TryHackMe-CTF-Writeup)
 
 ## Supportive Articles
 
@@ -24,6 +24,6 @@ Welcome to my blog, I am going to share write-ups, supportive articles about som
 *   ### [TryHackMe Rooms Categorized](https://sm4rty.medium.com/free-350-tryhackme-rooms-f3b7b2954b8d)
 
     ### Instructive CTF Write-ups
-    * ### [Pickle Rick - TryHackMe CTF Writeup](/Pickle-Rick-TryHackMe-CTF-Writeup/)
+    * ### [Pickle Rick - TryHackMe CTF Write-up](/Pickle-Rick-TryHackMe-CTF-Writeup/)
     * ### [Deathnote CTF Write-up](/Deathnote-CTF-Writeup/)
-    * ### [Moneybox CTF Writeup](/Moneybox-CTF-Writeup/)
+    * ### [Moneybox CTF Write-up](/Moneybox-CTF-Writeup/)
