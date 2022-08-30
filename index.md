@@ -5,10 +5,24 @@
 layout: default
 ---
 # HOMEPAGE
-## POSTS
+
+Welcome to my blog, I am going to share write-ups, supportive articles about some topics mentioned in my posts. Also try to publish posts to help beginners, some tricks in my "Zero to Hero CTF Solver" topic.
+
+## CTF Write-up
 
 *   ### [Pwn101 - TryHackMe CTF Detailed Writeup](/Pwn101-TryHackMe-CTF-Writeup)
 
+*   ### [Dear QA - TryHackMe CTF Writeup](/Dear-QA-TryHackMe-CTF-Writeup)
+
+## Supportive Articles
+
 *   ### [Buffer Overflow Protection - Stack Canary](/Buffer-Overflow-Protection-Stack-Canary)
 
-*   ### [Dear QA - TryHackMe CTF Writeup](/Dear-QA-TryHackMe-CTF-Writeup)
+## Zero to Hero CTF Solver
+
+*   ### [Zero to Hero CTF Path](https://docs.google.com/spreadsheets/d/1t2Yd7NIgrYfwUfkG8yhggPkiFqvBnUUsh6vd22ymPnA/edit?usp=sharing)
+*   ### [TryHackMe Rooms Categorized](https://sm4rty.medium.com/free-350-tryhackme-rooms-f3b7b2954b8d)
+
+    *   ### Instructive CTF Write-ups
+        * ### [Deathnote CTF Write-up](/Deathnote-CTF-Writeup/)
+        * ### [Pickle Rick - TryHackMe CTF Writeup](/Pickle-Rick-TryHackMe-CTF-Writeup/)
