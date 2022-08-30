@@ -1,4 +1,4 @@
-# Pwn101 - TryHackMe CTF Writeup
+# Pwn101 - TryHackMe CTF Write-up
 
 CTF link: 
 

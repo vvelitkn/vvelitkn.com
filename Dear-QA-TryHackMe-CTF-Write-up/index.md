@@ -1,4 +1,4 @@
-# Dear QA - TryHackMe CTF Writeup
+# Dear QA - TryHackMe CTF Write-up
 
 CTF link: 
 

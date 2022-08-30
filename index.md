@@ -7,8 +7,8 @@ layout: default
 # HOMEPAGE
 ## POSTS
 
-*   ### [Pwn101 - TryHackMe CTF Detailed Writeup](/Pwn101-TryHackMe-CTF-Writeup)
+*   ### [Pwn101 - TryHackMe CTF Detailed Writeup](/Pwn101-TryHackMe-CTF-Write-up)
 
 *   ### [Buffer Overflow Protection - Stack Canary](/Buffer-Overflow-Protection-Stack-Canary)
 
-*   ### [Dear QA - TryHackMe CTF Writeup](/Dear-QA-TryHackMe-CTF-Writeup)
+*   ### [Dear QA - TryHackMe CTF Writeup](/Dear-QA-TryHackMe-CTF-Write-up)
