@@ -23,7 +23,7 @@ Welcome to my blog, I am going to share write-ups, supportive articles about som
 *   ### [Zero to Hero CTF Path](https://docs.google.com/spreadsheets/d/1t2Yd7NIgrYfwUfkG8yhggPkiFqvBnUUsh6vd22ymPnA/edit?usp=sharing)
 *   ### [TryHackMe Rooms Categorized](https://sm4rty.medium.com/free-350-tryhackme-rooms-f3b7b2954b8d)
 
-    *   ### Instructive CTF Write-ups
-        * ### [Pickle Rick - TryHackMe CTF Writeup](/Pickle-Rick-TryHackMe-CTF-Writeup/)
-        * ### [Deathnote CTF Write-up](/Deathnote-CTF-Writeup/)
-        * ### [Moneybox CTF Writeup](/Moneybox-CTF-Writeup/)
+    ### Instructive CTF Write-ups
+    * ### [Pickle Rick - TryHackMe CTF Writeup](/Pickle-Rick-TryHackMe-CTF-Writeup/)
+    * ### [Deathnote CTF Write-up](/Deathnote-CTF-Writeup/)
+    * ### [Moneybox CTF Writeup](/Moneybox-CTF-Writeup/)
