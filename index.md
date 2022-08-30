@@ -24,5 +24,6 @@ Welcome to my blog, I am going to share write-ups, supportive articles about som
 *   ### [TryHackMe Rooms Categorized](https://sm4rty.medium.com/free-350-tryhackme-rooms-f3b7b2954b8d)
 
     *   ### Instructive CTF Write-ups
-        * ### [Deathnote CTF Write-up](/Deathnote-CTF-Writeup/)
         * ### [Pickle Rick - TryHackMe CTF Writeup](/Pickle-Rick-TryHackMe-CTF-Writeup/)
+        * ### [Deathnote CTF Write-up](/Deathnote-CTF-Writeup/)
+        * ### [Moneybox CTF Writeup](/Moneybox-CTF-Writeup/)
