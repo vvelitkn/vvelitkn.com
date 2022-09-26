@@ -13,7 +13,7 @@ test checks **al** value and sets ZF like cmp, **al** value set by **seta** afte
 
 <p align="center"> <img src="assets/Untitled%201.png"> </p>
 
-we see that empty r15d with **xor r15d, r15d** and **_strlen** call. Then **cmp rax, 1Ch**. **_strlen** function stores lenght of input to **rax**, after **_strlen** assign **rax** we see one more **cmp** function which controls last byte of our argument, if last char is “}” then ZF = 1. Up to this point our program controlled first 9 char (CTFLearn{) and last char (}) so our flag should be like this: CTFLearn{………..}. Program checked usage instructions.
+we see that empty r15d with **xor r15d, r15d** and **_strlen** call. Then **cmp rax, 1Ch**. **_strlen** function stores lenght of input to **rax**, after **_strlen** assign **rax** we see one more **cmp** function which controls last byte of our argument, if last char is “}” then ZF = 1. Up to this point our program controlled first 9 char "CTFLearn{" and last char "}" so our flag should be like this: CTFLearn{......}. Program checked usage instructions given at the beginning.
 
 We have to careful about this section.
 
