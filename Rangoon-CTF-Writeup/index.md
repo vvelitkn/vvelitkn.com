@@ -43,7 +43,7 @@ We found **strings** context, we should follow the code line by line and create 
 
 But if we create a wrong flag but with a right way we can see that program creates real flag for last cmp instruction, at least some info about the flag.
 
-We can execute code with this argument: CTFlearn{aaaaaaa_aaaaa_aaaa}
+We can execute code with this argument: CTFlearn{aaaaaaaa_aaaa_aaaa}
 
 <p align="center"> <img src="assets/Untitled%2010.png"> </p>
 
