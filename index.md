@@ -12,6 +12,7 @@ Welcome to my blog, I am going to share write-ups, supportive articles about som
 
 *   ### [Pwn101 - TryHackMe CTF Detailed Write-up](/Pwn101-TryHackMe-CTF-Writeup)
 *   ### [Rangoon CTF Write-up (Reverse Engineering)](/Rangoon-CTF-Writeup/)   
+*   ### [Ramada CTF Write-up (Reverse Engineering)](/Ramada-CTF-writeup/)
 *   ### [Dear QA - TryHackMe CTF Write-up](/Dear-QA-TryHackMe-CTF-Writeup)
 
 ## Supportive Articles
