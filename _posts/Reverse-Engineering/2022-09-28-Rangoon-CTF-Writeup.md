@@ -1,8 +1,18 @@
-# Rangoon CTF Write-up (Reverse Engineering)
+---
+title: "Rangoon CTF Write-up (Reverse Engineering)"
+classes: wide
+header:
+  teaser: assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/logo.png
+ribbon: DodgerBlue
+description: "cmp checks if **edi == 1 or edi != 1** and sets ZF (zero flag). We know that argc (argument counter) is stored in edi..."
+categories:
+  - Reverse Engineering
+toc: true
+---
 
 CTF link: [Rangoon](https://ctflearn.com/challenge/994)
 
-<p align="center"> <img src="assets/Untitled.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/Untitled.png)
 
 > Pseudocode created by IDA Pro is given at the bottom of the post.
 > 
@@ -11,41 +21,41 @@ cmp checks if **edi == 1 or edi != 1** and sets ZF (zero flag). We know that arg
 
 test checks **al** value and sets ZF like cmp, **al** value set by **seta** after **repe.** If we give argument starting with “CTFLearn{”  **al** will be set 1 (because ZF = 1), and **test al,al**  sets ZF = 1, we can jump to False branch.
 
-<p align="center"> <img src="assets/Untitled%201.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/Untitled%201.png)
 
 we see that empty r15d with **xor r15d, r15d** and **_strlen** call. Then **cmp rax, 1Ch**. **_strlen** function stores lenght of input to **rax**, after **_strlen** assign **rax** we see one more **cmp** function which controls last byte of our argument, if last char is “}” then ZF = 1. Up to this point our program controlled first 9 char "CTFLearn{" and last char "}" so our flag should be like this: CTFLearn{......}. Program checked usage instructions given at the beginning.
 
 We have to careful about this section.
 
-<p align="center"> <img src="assets/Untitled%202.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/Untitled%202.png)
 
 When we staticly debugging the program we can not see the stack and its variables mostly. Because variables, strings mostly stored another place and adding to stack in the runtime. So while inspecting code, we should have full knowladge of which function will be affect on the program,  changes what. 
 
 This **strings** section is written in runtime, when we check it staticly we can not see the context. 
 
-<p align="center"> <img src="assets/Untitled%203.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/Untitled%203.png)
 
 But if we can find the function adds data in this section, we can find what is inside that. 
 
-<p align="center"> <img src="assets/Untitled%204.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/Untitled%204.png)
 
-<p align="center"> <img src="assets/Untitled%205.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/Untitled%205.png)
 
-<p align="center"> <img src="assets/Untitled%206.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/Untitled%206.png)
 
-<p align="center"> <img src="assets/Untitled%207.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/Untitled%207.png)
 
-<p align="center"> <img src="assets/Untitled%208.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/Untitled%208.png)
 
 We found **strings** context, we should follow the code line by line and create the flag. First of all we our flag starts with “CTFlearn{” and ends with “}”. Also flag’s lenght is hex: 0x1C binary: 28. When we check the last box of tree we can see these **cmp** instruction, these are check “_” char is located right place. If we don’t place them and try to enter a flag like “CTFlearn{aaaaaaaaaaaaaaaaaa}”  program creates wrong flag.
 
-<p align="center"> <img src="assets/Untitled%209.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/Untitled%209.png)
 
 But if we create a wrong flag but with a right way we can see that program creates real flag for last cmp instruction, at least some info about the flag.
 
 We can execute code with this argument: CTFlearn{aaaaaaaa_aaaa_aaaa}
 
-<p align="center"> <img src="assets/Untitled%2010.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/Untitled%2010.png)
 
 ## IDA Pro Pseudocode
 

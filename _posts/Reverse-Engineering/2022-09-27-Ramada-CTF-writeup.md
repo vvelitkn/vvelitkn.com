@@ -1,15 +1,25 @@
-# Ramada CTF Write-up (Reverse Engineering)
+---
+title: "Ramada CTF Write-up (Reverse Engineering)"
+classes: wide
+header:
+  teaser: assets/images/Reverse-Engineering/Ramada-CTF-writeup/logo.png
+ribbon: DodgerBlue
+description: "The program check argc value and jumps another branch. If argc value is equal to 1, program prints insturactions; if ..."
+categories:
+  - Reverse Engineering
+toc: true
+---
 
 Ctf link: [Ramada](https://ctflearn.com/challenge/1009)
 
-<p align="center"> <img  src="assets/Untitled.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Ramada-CTF-writeup/Untitled.png)
 
 > Pseudocode created by IDA Pro is given at the bottom of the post.
 > 
 
 The program check argc value and jumps another branch. If argc value is equal to 1, program prints insturactions; if argc value is not equal to 1 program controls first 9 byte of input. 
 
-<p align="center"> <img  src="assets/Untitled%201.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Ramada-CTF-writeup/Untitled%201.png)
 
 In the next node program calls **_strlen** and save the result at rax. After checking the last byte of input program compares rax with hex: 1F decimal: 32.  
 
@@ -30,11 +40,11 @@ call    _Z9CheckFlagPKc ; CheckFlag(char const*)
 
 So our flag can be like this: CTFlearn{aaaaaaaaaaaaaaaaaaaaa}
 
-<p align="center"> <img  src="assets/Untitled%202.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Ramada-CTF-writeup/Untitled%202.png)
 
 We see two call functions here, first fill data section with words (4 byte). When we follow the section with IDA we see data but I prefer gdb output because we will use a fuzzer script.
 
-<p align="center"> <img  src="assets/Untitled%203.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Ramada-CTF-writeup/Untitled%203.png)
 
 We add breakpoint to CheckFlag(char const*), and execute code with flag we created.
 
@@ -43,9 +53,9 @@ pwndbg> b *CheckFlag(char const*)
 pwndbg> r CTFlearn{aaaaaaaaaaaaaaaaaaaaa}
 ```
 
-<p align="center"> <img  src="assets/Untitled%204.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Ramada-CTF-writeup/Untitled%204.png)
 
-<p align="center"> <img  src="assets/Untitled%205.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Ramada-CTF-writeup/Untitled%205.png)
 
 Here program controls input^3 in a for loop. We write a script to brute-force to find chars in this data. This script will try all ascii letters, digits and some other chars.
 
@@ -77,7 +87,7 @@ for i in range(len(data)):
 print(flag+'}')
 ```
 
-<p align="center"> <img  src="assets/Untitled%206.png"> </p>
+![Untitled](/assets/images/Reverse-Engineering/Ramada-CTF-writeup/Untitled%206.png)
 
 ```c
 int __cdecl main(int argc, const char **argv, const char **envp)
