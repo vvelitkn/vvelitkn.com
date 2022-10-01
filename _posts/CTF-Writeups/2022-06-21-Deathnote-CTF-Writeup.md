@@ -7,7 +7,6 @@ ribbon: MidnightBlue
 description: "We launch target machine and our kali and opened terminal as root. Check ifconfig and grab your ip address and start a scan...."
 categories:
   - CTF Writeups
-toc: true
 ---
 
 CTF link: 

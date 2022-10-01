@@ -7,7 +7,6 @@ ribbon: MidnightBlue
 description: "Check ports with nmap. We found http and ssh port in target server; http port exist so there should be a website..."
 categories:
   - CTF Writeups
-toc: true
 --- 
 
 CTF link: 

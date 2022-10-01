@@ -7,7 +7,6 @@ ribbon: DodgerBlue
 description: "cmp checks if edi == 1 or edi != 1 and sets ZF (zero flag). We know that argc (argument counter) is stored in edi..."
 categories:
   - Reverse Engineering
-toc: true
 ---
 
 CTF link: [Rangoon](https://ctflearn.com/challenge/994)

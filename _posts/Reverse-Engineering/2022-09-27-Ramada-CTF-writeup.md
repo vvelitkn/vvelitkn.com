@@ -7,7 +7,6 @@ ribbon: DodgerBlue
 description: "The program check argc value and jumps another branch. If argc value is equal to 1, program prints insturactions; if ..."
 categories:
   - Reverse Engineering
-toc: true
 ---
 
 Ctf link: [Ramada](https://ctflearn.com/challenge/1009)
