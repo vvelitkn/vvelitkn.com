@@ -1,8 +1,13 @@
-# Buffer Overflow Protection - Stack Canary
-
-Stack canaries or security cookies are randomly assigned or tell-tale parts added to binary. It aims to protect from changing/manipulating critical stack values like “Return Address Pointer”.
-
-<p align="center"> <img src="assets/canaries_png_by_dalidas_art_db041pb-250t.png"> </p>
+---
+title: "Buffer Overflow Protection - Stack Canary"
+classes: wide
+header:
+  teaser: _posts\Buffer-Overflow-Protection-Stack-Canary\assets\logo.jpg
+ribbon: red
+description: "Stack canaries or security cookies are randomly assigned or tell-tale parts added to binary. It aims to protect from changing/manipulating critical stack values like “Return Address Pointer”."
+categories:
+  - Binary Exploitation
+---
 
 One way to prevent the stack-based buffer overflow above from being successful, is introducing a stack canary just before the SFP and the RP. This token value will be added by the compiler and serve as a warning that SFP and RET may be written.
 
