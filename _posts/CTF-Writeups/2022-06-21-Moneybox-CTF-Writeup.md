@@ -1,10 +1,20 @@
-# Moneybox CTF Write-up
+---
+title: "Moneybox CTF Write-up"
+classes: wide
+header:
+  teaser: /assets/images/CTF-Writeups/Moneybox-CTF-Writeup/logo.png
+ribbon: MidnightBlue
+description: "We launch target machine and our kali and opened terminal as root. Check ifconfig and grab your ip address and start a scan....."
+categories:
+  - CTF Writeups
+toc: true
+---
 
 CTF link: 
 
 [MoneyBox: 1](https://www.vulnhub.com/entry/moneybox-1,653/)
 
-- We launched target machine and our kali and opened terminal as root.
+- We launch target machine and our kali and opened terminal as root.
 - Check ifconfig and grab your ip address and start a scan.
 
 > netdiscover -r xx.xx.xx.0/24

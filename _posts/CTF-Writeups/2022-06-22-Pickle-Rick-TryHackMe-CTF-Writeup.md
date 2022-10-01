@@ -1,4 +1,14 @@
-# Pickle Rick - TryHackMe CTF Writeup
+---
+title: "Pickle Rick - TryHackMe CTF Writeup"
+classes: wide
+header:
+  teaser: /assets/images/CTF-Writeups/Pickle-Rick-TryHackMe-CTF-Writeup/logo.jpg
+ribbon: MidnightBlue
+description: "Check ports with nmap. We found http and ssh port in target server; http port exist so there should be a website..."
+categories:
+  - CTF Writeups
+toc: true
+--- 
 
 CTF link: 
 

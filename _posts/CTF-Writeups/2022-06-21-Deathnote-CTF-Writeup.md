@@ -1,10 +1,20 @@
-# Deathnote CTF Writeup
+---
+title: "Deathnote CTF Write-up"
+classes: wide
+header:
+  teaser: /assets/images/CTF-Writeups/Deathnote-CTF-Writeup/logo.jpg
+ribbon: MidnightBlue
+description: "We launch target machine and our kali and opened terminal as root. Check ifconfig and grab your ip address and start a scan...."
+categories:
+  - CTF Writeups
+toc: true
+---
 
 CTF link: 
 
 [Deathnote: 1](https://www.vulnhub.com/entry/deathnote-1,739/)
 
-- We launched target machine and our kali and opened terminal as root.
+- We launch target machine and our kali and opened terminal as root.
 - Check ifconfig and grab your ip address and start a scan.
 
 > netdiscover -r xx.xx.xx.0/24
