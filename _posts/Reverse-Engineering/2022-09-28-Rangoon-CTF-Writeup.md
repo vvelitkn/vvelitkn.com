@@ -2,7 +2,7 @@
 title: "Rangoon CTF Write-up (Reverse Engineering)"
 classes: wide
 header:
-  teaser: assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/logo.png
+  teaser: /assets/images/Reverse-Engineering/Rangoon-CTF-Writeup/logo.png
 ribbon: DodgerBlue
 description: "cmp checks if edi == 1 or edi != 1 and sets ZF (zero flag). We know that argc (argument counter) is stored in edi..."
 categories:

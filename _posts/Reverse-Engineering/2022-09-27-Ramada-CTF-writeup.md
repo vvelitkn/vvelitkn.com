@@ -2,7 +2,7 @@
 title: "Ramada CTF Write-up (Reverse Engineering)"
 classes: wide
 header:
-  teaser: assets/images/Reverse-Engineering/Ramada-CTF-writeup/logo.png
+  teaser: /assets/images/Reverse-Engineering/Ramada-CTF-writeup/logo.png
 ribbon: DodgerBlue
 description: "The program check argc value and jumps another branch. If argc value is equal to 1, program prints insturactions; if ..."
 categories:
